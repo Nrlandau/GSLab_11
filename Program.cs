@@ -9,7 +9,7 @@ namespace Lab11
         //Vars
         private string name;
         private MovieCategory category;
-        //Constructor
+        //Constructors
         public Movie(string _name, MovieCategory _category)
         {
             if(_category > MovieCategory.SCIFI || _category < MovieCategory.ANIMATED)
@@ -35,6 +35,13 @@ namespace Lab11
         {
             return (MovieCategory)(_index);
         }
+        public static void DisplayCategorys()
+        {
+            for(MovieCategory i = MovieCategory.ANIMATED; i <= MovieCategory.SCIFI;i++)
+            {
+                System.Console.WriteLine(i);
+            }
+        }
         private static MovieCategory SetCategory(string _movieCat)
         {
             switch(_movieCat.ToLower())
@@ -52,7 +59,7 @@ namespace Lab11
     {
         static void Main(string[] args)
         {
-            System.Console.WriteLine(Movie.GetCagegories(4));
+            Movie.DisplayCategorys();
         }
     }
 }
