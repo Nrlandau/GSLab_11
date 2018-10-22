@@ -12,8 +12,15 @@ namespace Lab11
         //Constructor
         public Movie(string _name, MovieCategory _category)
         {
+            if(_category > MovieCategory.SCIFI || _category < MovieCategory.ANIMATED)
+                throw new ArgumentOutOfRangeException();
             name = _name;
             category = _category;
+        }
+        public Movie(string _name, string _category)
+        {
+            name = _name;
+            category = SetCategory(_category);
         }
         //Methods
         public static void DisplayMoviesFromCategory(ArrayList _movies, MovieCategory _category )
