@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Lab11
 {
@@ -20,15 +21,30 @@ namespace Lab11
         public Movie(string _name, string _category)
         {
             name = _name;
-            category = SetCategory(_category);
+            category = StringToCategory(_category);
         }
         //Methods
         public static void DisplayMoviesFromCategory(ArrayList _movies, MovieCategory _category )
         {
+            List<string> sortName = new List<string>();
             foreach(Movie m in _movies)
             {
                 if(m.category == _category)
-                    System.Console.WriteLine(m.name);
+                    sortName.Add(m.name);
+            }
+            if(sortName.Count > 1)
+            {
+                sortName.Sort();
+            }
+            if(sortName.Count > 0)
+            {
+                System.Console.WriteLine("The ");
+                foreach(string n in sortName)
+                    System.Console.WriteLine(n);
+            }
+            else
+            {
+                System.Console.WriteLine("There are no movies in the {0} category",_category.ToString().ToLower());
             }
         }
         public static MovieCategory GetCagegories(int _index)
@@ -42,7 +58,7 @@ namespace Lab11
                 System.Console.WriteLine(i);
             }
         }
-        private static MovieCategory SetCategory(string _movieCat)
+        private static MovieCategory StringToCategory(string _movieCat)
         {
             switch(_movieCat.ToLower())
             {
@@ -59,7 +75,9 @@ namespace Lab11
     {
         static void Main(string[] args)
         {
-            Movie.DisplayCategorys();
+            ArrayList movies = new ArrayList();
+            Movie.DisplayMoviesFromCategory(movies,MovieCategory.ANIMATED);
+
         }
     }
 }
