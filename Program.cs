@@ -25,7 +25,7 @@ namespace Lab11
             category = StringToCategory(_category);
         }
         //Methods
-        public static void DisplayMoviesFromCategory(ArrayList _movies, MovieCategory _category )
+        private static void DisplayMoviesFromCategory(ArrayList _movies, MovieCategory _category )
         {
             List<string> sortName = new List<string>();
             foreach(Movie m in _movies)
@@ -50,9 +50,17 @@ namespace Lab11
         }
         public static void DisplayMoviesFromCategory(ArrayList _movies, string _category)
         {
-            DisplayMoviesFromCategory(_movies,StringToCategory(_category));
+            int intCat;
+            if(int.TryParse(_category,out intCat))
+            {
+                DisplayMoviesFromCategory(_movies,intCat);
+            }
+            else
+            {
+                DisplayMoviesFromCategory(_movies,StringToCategory(_category));
+            }
         }
-        public static void DisplayMoviesFromCategory(ArrayList _movies, int _category)
+        private static void DisplayMoviesFromCategory(ArrayList _movies, int _category)
         {
             DisplayMoviesFromCategory(_movies,GetCagegories(_category));
         }
@@ -121,20 +129,12 @@ namespace Lab11
             while (true)
             {
                 string cat = "";
-                int numcat;
                 try
                 {
                     Movie.DisplayCategorys();
                     System.Console.WriteLine("Input a category");
                     cat = Console.ReadLine();
-                    if(int.TryParse(cat,out numcat))
-                    {
-                        Movie.DisplayMoviesFromCategory(movies,numcat);
-                    }
-                    else
-                    {
-                        Movie.DisplayMoviesFromCategory(movies,cat);
-                    }
+                    Movie.DisplayMoviesFromCategory(movies,cat);
                 }
                 catch(ArgumentException ex)
                 {
