@@ -48,15 +48,26 @@ namespace Lab11
                 System.Console.WriteLine("There are no movies in the {0} category",_category.ToString().ToLower());
             }
         }
+        public static void DisplayMoviesFromCategory(ArrayList _movies, string _category)
+        {
+            DisplayMoviesFromCategory(_movies,StringToCategory(_category));
+        }
+        public static void DisplayMoviesFromCategory(ArrayList _movies, int _category)
+        {
+            DisplayMoviesFromCategory(_movies,GetCagegories(_category));
+        }
         public static MovieCategory GetCagegories(int _index)
         {
+            _index--;
+            if ((MovieCategory)_index < MovieCategory.ANIMATED || (MovieCategory)_index > MovieCategory.SCIFI)
+                throw new ArgumentException("That index does not link to a category");
             return (MovieCategory)(_index);
         }
         public static void DisplayCategorys()
         {
             for(MovieCategory i = MovieCategory.ANIMATED; i <= MovieCategory.SCIFI;i++)
             {
-                System.Console.WriteLine("{0}:{1}",(int)i,i);
+                System.Console.WriteLine("{0}:{1}",(int)i + 1,i);
             }
         }
         public static MovieCategory StringToCategory(string _movieCat)
@@ -118,11 +129,11 @@ namespace Lab11
                     cat = Console.ReadLine();
                     if(int.TryParse(cat,out numcat))
                     {
-                        Movie.DisplayMoviesFromCategory(movies,Movie.GetCagegories(numcat));
+                        Movie.DisplayMoviesFromCategory(movies,numcat);
                     }
                     else
                     {
-                        Movie.DisplayMoviesFromCategory(movies,Movie.StringToCategory(cat));
+                        Movie.DisplayMoviesFromCategory(movies,cat);
                     }
                 }
                 catch(ArgumentException ex)
