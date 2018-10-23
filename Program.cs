@@ -86,7 +86,7 @@ namespace Lab11
             movies.Add(new Movie("Name in SPACE",MovieCategory.SCIFI));
             movies.Add(new Movie("Mame",MovieCategory.HORROR));
             movies.Add(new Movie("Mame2",MovieCategory.HORROR));
-            movies.Add(new Movie("AA","horror"));
+            movies.Add(new Movie("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA","horror"));
             return movies;
         }
         static bool isContinue() 
@@ -107,7 +107,6 @@ namespace Lab11
         static void Main(string[] args)
         {
             ArrayList movies = MakeMovies();
-
             while (true)
             {
                 string cat = "";
@@ -131,7 +130,7 @@ namespace Lab11
                     System.Console.WriteLine(ex.Message);
                     continue;
                 }
-            if(isContinue())
+            if(!isContinue())
                 break;
             }
         }
